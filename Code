@@ -1,0 +1,20 @@
+var app=SpreadsheetApp;
+var calendar=CalendarApp.getCalendarById("omarciocavalcante@gmail.com");
+var sheet=app.getActiveSheet();
+
+
+function myCalendar()
+{
+ var myEvents=calendar.getEvents(new Date("2020-01-01T00:00:00"), new Date("2020-12-12T00:00:00"));
+  var lastRow=sheet.getLastRow()+1;
+  var i=0;
+
+  myEvents.map(function(elem,ind,obj){
+    sheet.getRange(lastRow+i, 1).setValue(elem.getTitle());
+    sheet.getRange(lastRow+i, 2).setValue(elem.getStartTime());
+    sheet.getRange(lastRow+i, 3).setValue(elem.getEndTime());
+    sheet.getRange(lastRow+i, 4).setValue(elem.getGuestList());
+    sheet.getRange(lastRow+i, 5).setValue(elem.getCreators());
+    i++;
+  });
+}
