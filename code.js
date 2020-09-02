@@ -39,8 +39,8 @@ function setup() {
   sheet.getRange('B3').setValue('bambam@example.com').setBackground('#FFFBCE');
 
   // Título das colunas
-  sheet.getRange('A5:E5')
-    .setValues([ ['Título do evento', 'Início', 'Término', 'Criado por', 'Convidados'] ])
+  sheet.getRange('A5:F5')
+    .setValues([ ['Título do evento', 'Início', 'Término', 'Criado por', 'Convidados','Tempo de reunião'] ])
     .setBackground('#B5BBFF');
 }
 
@@ -69,4 +69,17 @@ function importCalendar() {
 
   // Inserindo as linhas na planilha
   sheet.getRange(6, 1, rows.length, 5).setValues(rows);
+  
+  // fazendo calculo
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('F6').activate();
+  var currentCell = spreadsheet.getCurrentCell();
+  spreadsheet.getSelection().getNextDataRange(SpreadsheetApp.Direction.DOWN).activate();
+  currentCell.activateAsCurrentCell();
+  spreadsheet.getActiveRange().setFormula('=IF(C6>0;C6-B6;" ")');
+
+  // Alinhar
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('A:F').activate();
+  spreadsheet.getActiveRangeList().setHorizontalAlignment('center');
 }
