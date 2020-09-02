@@ -76,7 +76,7 @@ function importCalendar() {
   var currentCell = spreadsheet.getCurrentCell();
   spreadsheet.getSelection().getNextDataRange(SpreadsheetApp.Direction.DOWN).activate();
   currentCell.activateAsCurrentCell();
-  spreadsheet.getActiveRange().setFormula('=IF(C6>0;C6-B6;" ")');
+  spreadsheet.getActiveRange().setFormula('=IF(C6>0;C6-B6;" ")').setNumberFormat('[h]:mm:ss');
 
   // Alinhar
   var spreadsheet = SpreadsheetApp.getActive();
